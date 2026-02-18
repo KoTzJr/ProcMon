@@ -33,9 +33,8 @@ private :
         void  Snapshot ();
         void  ProcessEnrty();
 public :
-            Sy Process();
-            void  updateProcess();
-    ProcMon ();
+        Sy Process();
+        ProcMon ();
 
 };
 

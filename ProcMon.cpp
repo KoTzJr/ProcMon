@@ -3,12 +3,7 @@
 //
 
 #include "ProcMon.h"
-
 #include <iostream>
-#include <ostream>
-
-
-
 
 ProcMon::ProcMon() {
     Snapshot();
@@ -30,7 +25,7 @@ void ProcMon::ProcessEnrty() {
 
 Sy ProcMon::Process() {
 
-    std::vector<ProcessList> processes;
+    Sy processes;
 
     if (!Process32First(Handle, &pEntry)) {
         CloseHandle(Handle);
@@ -41,29 +36,8 @@ Sy ProcMon::Process() {
              pEntry.th32ProcessID,
              pEntry.szExeFile,
              pEntry.cntThreads});
+
     }while (Process32Next(Handle, &pEntry));
 
     return processes;
-}
-
-
-void ProcMon::updateProcess() {
-    std::vector<ProcessList> processes;
-    while (Process32First(Handle, &pEntry)) {
-        Snapshot ();
-        ProcessEnrty();
-        do {
-            processes.push_back(ProcessList{
-           pEntry.th32ProcessID,
-           pEntry.szExeFile,
-           pEntry.cntThreads});
-
-            for (auto process : processes) {
-                std::cout << process.name << std::endl;
-            }
-
-        }while (Process32Next(Handle, &pEntry));
-
-        processes.clear();
-    }
 }
