@@ -37,9 +37,33 @@ Sy ProcMon::Process() {
         return Sy{};
     }
     do {
-         processes.push_back(ProcessList{pEntry.cntUsage,pEntry.szExeFile,pEntry.cntThreads});
+         processes.push_back(ProcessList{
+             pEntry.th32ProcessID,
+             pEntry.szExeFile,
+             pEntry.cntThreads});
     }while (Process32Next(Handle, &pEntry));
 
     return processes;
 }
 
+
+void ProcMon::updateProcess() {
+    std::vector<ProcessList> processes;
+    while (Process32First(Handle, &pEntry)) {
+        Snapshot ();
+        ProcessEnrty();
+        do {
+            processes.push_back(ProcessList{
+           pEntry.th32ProcessID,
+           pEntry.szExeFile,
+           pEntry.cntThreads});
+
+            for (auto process : processes) {
+                std::cout << process.name << std::endl;
+            }
+
+        }while (Process32Next(Handle, &pEntry));
+
+        processes.clear();
+    }
+}

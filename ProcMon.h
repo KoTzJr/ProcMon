@@ -13,12 +13,12 @@
 class ProcessList {
 public :
      DWORD pid;
-     std::string nome;
+     std::string name;
      DWORD numThreads;
 
     ProcessList(DWORD pid,std::string nome,DWORD num) {
         this->pid=pid;
-        this->nome=nome;
+        this->name=nome;
         this->numThreads=num;
     }
 };
@@ -34,6 +34,7 @@ private :
         void  ProcessEnrty();
 public :
             Sy Process();
+            void  updateProcess();
     ProcMon ();
 
 };
