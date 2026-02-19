@@ -2,13 +2,11 @@
   <img src="img/ProcMon.png" alt="ProcMon" width="1000">
 </p>
 
-
 <h1> Oque é ProcMon ?</h1>
 
 É uma biblioteca para monitorar o sistema na execução de programas no sistema operacional.
 
 <h2> Como usar ? </h2>
-
 
 ```cpp
 #include <iostream>
@@ -33,3 +31,11 @@ PID: 8296       Threads: 1      Nome: RuntimeBroker.exe
 PID: 22780      Threads: 9      Nome: steamwebhelper.exe
 PID: 2028       Threads: 107    Nome: firefox.exe
 PID: 20088      Threads: 2      Nome: crashhelper.exe
+```
+
+## Requisitos
+- C++20
+- MSVC and MIGW
+
+
+
