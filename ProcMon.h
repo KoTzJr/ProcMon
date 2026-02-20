@@ -22,7 +22,21 @@ public :
         this->numThreads=num;
     }
 };
+struct NAME_Exe {
+    std::string AppName;
+    std::string Name;
+};
+struct PID {
+    DWORD id;
+    DWORD pid;
+};
+
+struct Thread {
+    DWORD thread;
+    DWORD ThreadID;
+};
 typedef std::vector<ProcessList> Sy;
+typedef DWORD _VALUE_;
 
 class ProcMon
     {
@@ -33,8 +47,14 @@ private :
         void  Snapshot ();
         void  ProcessEnrty();
 public :
-        Sy Process();
+        void Process(Sy & i);
         ProcMon ();
+        ~ProcMon();
+        PROCESSENTRY32 GetEntry();
+        bool Search (NAME_Exe E,PID ID,Thread T);
+        static bool SearchID(_VALUE_ id,ProcessList list);
+        bool SearchName(std::string ExeAppName,std::string obj);
+        void KillProcess(_VALUE_ id);
 
 };
 
