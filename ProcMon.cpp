@@ -15,7 +15,6 @@ ProcMon::~ProcMon() {
         CloseHandle(Handle);
     }
 }
-
 void ProcMon::Snapshot() {
     HANDLE get = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
     if (get == INVALID_HANDLE_VALUE) {
@@ -25,13 +24,14 @@ void ProcMon::Snapshot() {
 }
 
 void ProcMon::ProcessEnrty() {
+
     pEntry.dwSize = sizeof(PROCESSENTRY32);
 }
 
 
-void ProcMon::Process(Sy & i) {
+void ProcMon::Process(ListProcess & item) {
 
-    Sy processes;
+    ListProcess processes;
 
     if (Handle != INVALID_HANDLE_VALUE) {
         CloseHandle(Handle);
@@ -53,12 +53,10 @@ void ProcMon::Process(Sy & i) {
                 pEntry.th32ProcessID,
                 std::string(pEntry.szExeFile),
                 pEntry.cntThreads});
-              i = processes;
+              item = processes;
         }while (Process32Next(Handle, &pEntry));
 }
-
-
-void ProcMon::KillProcess(_VALUE_ id) {
+void ProcMon::KillProcess(DWValue id) {
   auto get = OpenProcess(PROCESS_TERMINATE, FALSE, id);
     if (get == NULL) {
         std::cout << GetLastError() << std::endl;
@@ -75,7 +73,7 @@ bool ProcMon::SearchName(std::string ExeAppName,std::string copy) {
     return false;
 }
 
-bool ProcMon::Search(NAME_Exe E, PID ID, Thread T) {
+bool ProcMon::Search(Name_exe E, PID ID, Thread T) {
     if (E.AppName.empty() == false
         && E.Name.empty() == false) {
         return E.AppName.find(E.Name) !=

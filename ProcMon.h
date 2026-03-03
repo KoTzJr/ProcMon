@@ -10,21 +10,23 @@
 #include <tlhelp32.h>
 #include <vector>
 
+
+typedef std::string str;
 class ProcessList {
 public :
      DWORD pid;
-     std::string name;
+     str name;
      DWORD numThreads;
 
-    ProcessList(DWORD pid,std::string nome,DWORD num) {
+    ProcessList(DWORD pid,std::string name,DWORD num) {
         this->pid=pid;
-        this->name=nome;
+        this->name=name;
         this->numThreads=num;
     }
 };
-struct NAME_Exe {
-    std::string AppName;
-    std::string Name;
+struct Name_exe {
+    str AppName;
+    str Name;
 };
 struct PID {
     DWORD id;
@@ -35,8 +37,8 @@ struct Thread {
     DWORD thread;
     DWORD ThreadID;
 };
-typedef std::vector<ProcessList> Sy;
-typedef DWORD _VALUE_;
+typedef std::vector<ProcessList> ListProcess;
+typedef DWORD DWValue;
 
 class ProcMon
     {
@@ -47,14 +49,14 @@ private :
         void  Snapshot ();
         void  ProcessEnrty();
 public :
-        void Process(Sy & i);
+        void Process(ListProcess & item);
         ProcMon ();
         ~ProcMon();
         PROCESSENTRY32 GetEntry();
-        bool Search (NAME_Exe E,PID ID,Thread T);
-        static bool SearchID(_VALUE_ id,ProcessList list);
-        bool SearchName(std::string ExeAppName,std::string obj);
-        void KillProcess(_VALUE_ id);
+        static  bool Search (Name_exe E,PID ID,Thread T);
+        static  bool SearchID(DWValue id,ProcessList list);
+        static  bool SearchName(str ExeAppName,str obj);
+        void KillProcess(DWValue id);
 
 };
 
