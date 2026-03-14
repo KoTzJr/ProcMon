@@ -66,10 +66,11 @@ namespace ProcMon {
             void  Snapshot ();
             void  ProcessEnrty();
             void ProcessPrint(VecPCMOV & processes);
-            str local (DWORD id);
+            str URL_Process_Exe (DWORD id);
             PROCESSENTRY32 GetEntry();
             double MemoryRAM(DWORD id);
     public :
+            double CPU (DWORD id);
             void Process(VecPCMOV & item);
             VecPCMOV Process();
             PCMOV ();
