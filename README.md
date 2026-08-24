@@ -39,3 +39,4 @@ PID: 20088      Threads: 2      Nome: crashhelper.exe
 
 
 
+autor by kotz
